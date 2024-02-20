@@ -8,7 +8,8 @@
                 @click="selectTarget(key, item.name)"
                 class="weather-widget__target-item"
             >
-                {{ item.name }}, {{ item.state }}
+                
+                {{ getTileItem(item) }}
             </div>
         </div>
     </div> 
@@ -33,8 +34,12 @@ export default {
         targetList: function() {
             return this.geoLocation.data
         },
+
     },
     methods: {
+        getTileItem: function(item) {
+            return (typeof item.state !== 'undefined') ? item.name + ', ' + item.state : item.name
+        },        
         selectTarget: function(key, value) {
             this.target = value
             this.targetIndex = key
@@ -62,7 +67,12 @@ export default {
     },
     watch: {
         target() {
-            this.getLocation()
+            if (this.target !== '') {
+                this.getLocation()
+                this.showTargetList = true
+            } else {
+                this.showTargetList = false
+            }
         },
         targetIndex() {
             this.showTargetList = (this.targetIndex == null) ? true : false
