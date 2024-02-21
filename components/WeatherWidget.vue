@@ -98,26 +98,8 @@ export default {
             this.getWeatherFuture()
             this.msgNotSearch = false
         },
-        selectTarget: function(key, value) {
-            this.target = value
-            this.targetIndex = key
-            this.getWeather()
-            this.getWeatherFuture()
-            this.showTargetList = false
-        },
-        getLocation: function() {
-            this.$weatherApi.get('http://api.openweathermap.org/geo/1.0/direct?q=' + this.target + '&limit=5&appid=' + this.apikey)
-                .then(response => {
-                    this.geoLocation.data = response
-                })
-                .catch(error => {
-                    this.geoLocation.error = error
-                    this.msgNotSearch = true
-                    this.showTargetList = false
-                })            
-        },
         getWeather: function() {
-            this.$weatherApi.get('https://api.openweathermap.org/data/2.5/weather?units=metric&lat=' + this.lat + '&lon=' + this.lon + '&appid='  + this.apikey)
+            this.$weatherApi.get(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${this.lat}&lon=${this.lon}&appid=${this.apikey}`)
                 .then(response => {
                     this.weather.data = response
                 })
@@ -126,7 +108,7 @@ export default {
                 })              
         },
         getWeatherFuture: function() {
-            this.$weatherApi.get('https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=' + this.lat + '&lon=' + this.lon + '&appid='  + this.apikey)
+            this.$weatherApi.get(`https://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${this.lat}&lon=${this.lon}&appid=${this.apikey}`)
                 .then(response => {
                     this.weatherFuture.data = response
                 })

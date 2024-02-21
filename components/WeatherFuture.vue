@@ -23,7 +23,7 @@ export default {
     },
     methods: {
         getIconWeather: function(object) {
-            return this.iconUrl + object.weather[0].icon + '.png'
+            return `${this.iconUrl}${object.weather[0].icon}.png`
         },
         getDate: function(object) {
             const time = object.dt * 1000

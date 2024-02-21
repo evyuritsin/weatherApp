@@ -38,7 +38,7 @@ export default {
     },
     methods: {
         getTileItem: function(item) {
-            return (typeof item.state !== 'undefined') ? item.name + ', ' + item.state : item.name
+            return (typeof item.state !== 'undefined') ? `${item.name}, ${item.state}` : item.name
         },        
         selectTarget: function(key, value) {
             this.target = value
@@ -51,7 +51,7 @@ export default {
         },
         getLocation: function() {
             this.targetIndex = null
-            this.$weatherApi.get('http://api.openweathermap.org/geo/1.0/direct?q=' + this.target + '&limit=5&appid=' + this.apikey)
+            this.$weatherApi.get(`http://api.openweathermap.org/geo/1.0/direct?q=${this.target}&limit=5&appid=${this.apikey}`)
                 .then(response => {
                     this.geoLocation.data = response.data
                     if (Object.keys(this.geoLocation.data).length == 0) 

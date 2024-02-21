@@ -22,7 +22,7 @@ export default {
     },
     computed: {
         getIconWeather: function() {
-            return this.iconUrl + this.weather.icon + '.png'
+            return `${this.iconUrl}${this.weather.icon}.png`
         },
         getDate: function() {
             const time = this.time * 1000
